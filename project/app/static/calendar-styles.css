@@ -1,0 +1,88 @@
+/* Stylesheet for styling the calendars used throughout the website */
+
+/* Styling for the calendar container */
+.calendar_container {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styling for the calendar itself */
+.calendar_template {
+    width: 45rem;
+    height: 50rem;
+    background-color: rgba(255, 255, 255, 0.952);
+    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
+}
+
+/* Styles the banner at the top of the calendar where the months and selected date are displayed */
+.months {
+    width: 100%;
+    height: 10rem;
+    background-color: rgb(23, 162, 184);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    text-align: center;
+    text-shadow: 0 .3rem .5rem rgba(0, 0, 0, 0.5);
+}
+
+.months i {
+    cursor: pointer;
+}
+
+/* Styles weekdays displayed at the top of the calendar */
+.weekdays {
+    width: 100%;
+    height: 5rem;
+    padding: 0 0.4rem;
+    display: flex;
+    align-items: center;
+    color: rgb(23, 162, 184);
+    font-weight: bold;
+}
+
+.weekdays div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(44.2rem / 7);
+}
+
+/* Styles the days displayed in the calendar */
+.days {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.2rem;
+    color: black;
+}
+
+.days div {
+    margin: 0.3rem;
+    width: calc(40.2rem / 7);
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+/* Greys out the days that are not part of the month but are still displayed on the calendar */
+.previous_date, .following_date {
+    opacity: 0.5;
+}
+
+/* Highlights the selected date */
+.date_today {
+    background-color: rgb(23, 162, 184);
+}
+
+/* Highlights hovered-on dates */
+.days div:hover:not(.date_today) {
+    background-color: rgb(229, 255, 255);
+    border: 0.1rem solid black;
+    cursor: pointer;
+}

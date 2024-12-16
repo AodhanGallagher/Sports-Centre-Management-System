@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+  {% block content %}
+    <div class="container">
+        <div class="row justify-content-center mb-2 mt-3">
+            <h1 class="text-white font-weight-bold">Hello, {{ user_info.forename.capitalize() }}</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 bg-light rounded pt-3 px-4">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID </th>
+                        <th>Username</th>
+                        <th>Forename</th>
+                        <th>Surname</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for customer in customer_info %}
+                    <tr>
+                        <td>{{ customer.id }}</td>
+                        <td>{{ customer.username }}</td>
+                        <td>{{ customer.forename }}</td>
+                        <td>{{ customer.surname }}</td>
+                        <td>{{ customer.email }}</td>
+                        <td>
+                            <form method="post" name="Read">
+                                {{ button.hidden_tag() }}
+                                <p><input type="submit" class="btn btn-primary" value="Edit" name="{{customer.id}}"></p>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

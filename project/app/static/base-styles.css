@@ -1,0 +1,19 @@
+/* Stylesheet for styling the base of the website and the home page */
+
+/* Styling the body and footer of all pages */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+footer {
+    margin-top: auto;
+    font-size: small;
+}
+
+/* Styling the carousel images in the home page */
+.carousel-inner > .carousel-item > img {
+    width: 1800px;
+    height: 550px;
+}

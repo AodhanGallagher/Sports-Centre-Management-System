@@ -1,0 +1,50 @@
+/* CSS for styling the cards on the customer dashboard */
+.scrolling-wrapper {
+	overflow-x: auto;
+}
+
+.card-block {
+	height: 200px;
+	background-position: center;
+	background-size: cover;
+	transition: all 0.2s ease-in-out !important;
+	border-radius: 20px;
+}
+
+.card-block:hover {
+    transform: translateY(-5px);
+    box-shadow: none;
+    opacity: 0.9;
+}
+
+
+/* CSS for styling scrollbars on the website */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #e4e4e4;
+  	border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+  	border-radius: 100px;
+  	background: linear-gradient(to left, rgba(2, 0, 36, 1), rgba(0, 212, 255, 1));
+}
+
+/* CSS for styling the cards next to the calendar */
+.card-block-calendar {
+	height: 170px;
+	background-position: center;
+	background-size: cover;
+	transition: all 0.2s ease-in-out !important;
+	border-radius: 20px;
+	width: 125%;
+}
+
+.btn_book {
+	height: 32px;
+	width: 75px;
+}

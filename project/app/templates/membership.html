@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+  {% block content %}
+    <!-- Container used to display everything beneath the nav bar -->
+    <div class="container">
+      <div class="row justify-content-center mb-2 mt-3">
+        <h1 class="text-white font-weight-bold">Membership</h1> <!-- Header of the page -->
+      </div>
+      <!-- div used to contain the table and card that houses the table -->
+      <div class="row justify-content-center">
+        {% if user_info.membership_id == None %}
+        <div class="col-8 bg-light rounded pt-3 px-4">
+          <!-- Membership form -->
+          <form form action="/membership" method="post" name="membership">
+            {{ form.hidden_tag() }}
+            <div class="row">
+              <div class="form-group col 6">
+                {{ form.title.label }}
+                {{ form.title(class_="form-control", placeholder_="Mr, Mrs") }}
+                {% for error in form.title.errors %}
+                <div class="alert alert-danger" role="alert">
+                  [{{ error }}]
+                </div>
+                {% endfor %}
+              </div>
+              <div class="form-group col-6">
+                {{ form.name_on_card.label }}
+                {{ form.name_on_card(class_="form-control", placeholder_="John Smith") }}
+                {% for error in form.name_on_card.errors %}
+                <div class="alert alert-danger" role="alert">
+                  [{{ error }}]
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="form-group">
+              {{ form.acc_number.label }}
+              {{ form.acc_number(class_="form-control", placeholder_="1111 2222 3333 4444") }}
+              {% for error in form.acc_number.errors %}
+              <div class="alert alert-danger" role="alert">
+                [{{ error }}]
+              </div>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.expiry_date.label }}
+              {{ form.expiry_date(class_="form-control", placeholder_="Oct 2023 = 1023") }}
+              {% for error in form.expiry_date.errors %}
+              <div class="alert alert-danger" role="alert">
+                [{{ error }}]
+              </div>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.sec_number.label }}
+              {{ form.sec_number(class_="form-control", placeholder_="123") }}
+              {% for error in form.sec_number.errors %}
+              <div class="alert alert-danger" role="alert">
+                [{{ error }}]
+              </div>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.type.label }}
+              {{ form.type(class_="form-control")}}
+              {% for error in form.type.errors %}
+              <div class="alert alert-danger" role="alert">
+                [{{ error }}]
+              </div>
+              {% endfor %}
+            </div>
+            <p><input type=submit value=Register></p>
+          </form>
+        </div>
+        {% else %}
+        <div class="col-8 bg-light rounded pt-3 px-4">
+          <p>We are sorry you want to leave us :(</p>
+          <p>Click below to cancel your membership.</p>
+            <form method="post" name="cancel">
+                {{ form.hidden_tag() }}
+                <p><input type="submit" value="Cancel"></p>
+            </form>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endblock %}

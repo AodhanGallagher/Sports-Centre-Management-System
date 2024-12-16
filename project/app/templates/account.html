@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+  {% block content %}
+    <!-- Container used to display everything beneath the nav bar -->
+    <div class="container">
+      <div class="row justify-content-center my-3">
+        <h1 class="text-white font-weight-bold">Account</h1> <!-- Header of the page -->
+      </div>
+      <!-- div used to contain main page content -->
+      <div class="row justify-content-center">
+        <div class="col-10 bg-light rounded pt-4 px-5 pb-4">
+          <div class="row justify-content-center mb-4">
+            <h2 class="font-weight-bold text-info">User Information</h2>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <p class="font-weight-bold">First Name: </p>
+            </div>
+            <div class="col-2">
+              <p>{{ forename }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <p class="font-weight-bold">Surname: </p>
+            </div>
+            <div class="col-2">
+              <p>{{ surname }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <p class="font-weight-bold">Username: </p>
+            </div>
+            <div class="col-2">
+              <p>{{ username }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <p class="font-weight-bold">Email Address: </p>
+            </div>
+            <div class="col-9">
+              <p>{{ email }}</p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <!-- Button to change password -->
+            <div class="d-flex ml-n3">
+              <a class="btn btn-info" href="/change_password" role="button">Change Password</a>
+            </div>
+            <!-- Button to logout -->
+            <div class="d-flex mr-n2">
+              <a class="btn btn-outline-info px-3 font-weight-bold" href="/logout" role="button">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+  {% block content %}
+    <div class="container">
+        <div class="row justify-content-center mb-2 mt-3">
+            <h1 class="text-white font-weight-bold">Management</h1> <!-- Header of the page -->
+        </div>
+        <div class="col bg-light rounded pt-3 px-4 mt-3">
+            <h3 class="text-black font-weight-bold">Alter gym details</h3>
+            <p class="pt-1">Choose a button to select a database table to change or add to.</p>
+            <hr>
+            <!-- Main buttons -->
+            <div class="row">
+                <div class="col">
+                    <button id="btn_users" type="button" class="btn btn-primary">Users</button>
+                </div>
+                <div class="col">
+                    <button id="btn_sessions" type="button" class="btn btn-primary">Sessions</button>
+                </div>
+                <div class="col">
+                    <button id="btn_calendar_slots" type="button" class="btn btn-primary">Calendar Slots</button>
+                </div>
+                <div class="col">
+                    <button id="btn_locations" type="button" class="btn btn-primary">Locations</button>
+                </div>
+                <div class="col">
+                    <button id="btn_discounts" type="button" class="btn btn-primary">Discounts</button>
+                </div>    
+            </div>
+            <a>&nbsp;</a>
+
+            <!-- Management table -->
+            <div class="row">
+                <table id = "mgmt-table" class="table">
+                </table>
+                <button class="btn_modal btn btn-primary" id="btn_add_modal" name="users">Add</button>
+            </div>
+            <a>&nbsp;</a>
+
+
+            <div id = "mdl_users" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">User</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/management" method="post" name="users" id="form_users">
+                                {{ userForm.hidden_tag() }}
+                                <div class="form-group">
+                                    {{ userForm.id.label }}
+                                    {{ userForm.id(class_="form-control", readonly="readonly") }}
+                                </div>
+                                <div class="form-group">
+                                    {{ userForm.forename.label }}
+                                    {{ userForm.forename(class_="form-control") }}
+                                    {% for error in userForm.forename.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ userForm.surname.label }}
+                                    {{ userForm.surname(class_="form-control") }}
+                                    {% for error in userForm.surname.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ userForm.username.label }}
+                                    {{ userForm.username(class_="form-control") }}
+                                    {% for error in userForm.username.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ userForm.email.label }}
+                                    {{ userForm.email(class_="form-control") }}
+                                    {% for error in userForm.email.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ userForm.privilege.label }}
+                                    {{ userForm.privilege(class_="form-control") }}
+                                    {% for error in userForm.privilege.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <p>{{ userForm.submit(class_= "btn btn-primary") }}</p>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id = "mdl_sessions" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Session</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/management" method="post" name="sessions" id="form_sessions">
+                                {{ sessionForm.hidden_tag() }}
+                                <div class="form-group">
+                                    {{ sessionForm.id.label }}
+                                    {{ sessionForm.id(class_="form-control", readonly="readonly") }}
+                                </div>
+                                <div class="form-group">
+                                    {{ sessionForm.name.label }}
+                                    {{ sessionForm.name(class_="form-control") }}
+                                    {% for error in sessionForm.name.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ sessionForm.price.label }}
+                                    {{ sessionForm.price(class_="form-control") }}
+                                    {% for error in sessionForm.price.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ sessionForm.duration.label }}
+                                    {{ sessionForm.duration(class_="form-control") }}
+                                    {% for error in sessionForm.duration.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ sessionForm.location.label }}
+                                    {{ sessionForm.location(class_="form-control") }}
+                                    {% for error in sessionForm.location.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <p>{{ sessionForm.submit(class_= "btn btn-primary") }}</p>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id = "mdl_calendar_slots" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Calendar Slot</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/management" method="post" name="calendar_slots" id="form_calendar_slots">
+                                {{ calendarForm.hidden_tag() }}
+                                <div class="form-group">
+                                    {{ calendarForm.id.label }}
+                                    {{ calendarForm.id(class_="form-control", readonly="readonly") }}
+                                </div>
+                                <div class="form-group">
+                                    {{ calendarForm.weekday.label }}
+                                    {{ calendarForm.weekday(class_="form-control") }}
+                                    {% for error in calendarForm.weekday.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ calendarForm.time.label }}
+                                    {{ calendarForm.time(class_="form-control") }}
+                                    {% for error in calendarForm.time.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ calendarForm.session.label }}
+                                    {{ calendarForm.session(class_="form-control") }}
+                                    {% for error in calendarForm.session.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <p>{{ calendarForm.submit(class_= "btn btn-primary") }}</p>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id = "mdl_locations" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Location</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/management" method="post" name="locations" id="form_locations">
+                                {{ locationForm.hidden_tag() }}
+                                <div class="form-group">
+                                    {{ locationForm.id.label }}
+                                    {{ locationForm.id(class_="form-control", readonly="readonly") }}
+                                </div>
+                                <div class="form-group">
+                                    {{ locationForm.name.label }}
+                                    {{ locationForm.name(class_="form-control") }}
+                                    {% for error in locationForm.name.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ locationForm.opening_time.label }}
+                                    {{ locationForm.opening_time(class_="form-control") }}
+                                    {% for error in locationForm.opening_time.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ locationForm.closing_time.label }}
+                                    {{ locationForm.closing_time(class_="form-control") }}
+                                    {% for error in locationForm.closing_time.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {{ locationForm.capacity.label }}
+                                    {{ locationForm.capacity(class_="form-control") }}
+                                    {% for error in locationForm.capacity.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <p>{{ locationForm.submit(class_= "btn btn-primary") }}</p>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id = "mdl_discounts" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Discount</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/management" method="post" name="discounts" id="form_discounts">
+                                {{ discountForm.hidden_tag() }}
+                                <div class="form-group">
+                                    {{ discountForm.id.label }}
+                                    {{ discountForm.id(class_="form-control", readonly="readonly") }}
+                                </div>
+                                <div class="form-group">
+                                    {{ discountForm.disc_amount.label }}
+                                    {{ discountForm.disc_amount(class_="form-control") }}
+                                    {% for error in discountForm.disc_amount.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            [{{ error }}]
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <p>{{ discountForm.submit(class_= "btn btn-primary") }}</p>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col bg-light rounded pt-3 px-4 mt-3">
+            <h3 class="text-black font-weight-bold">Statistics</h3>
+            <p class="pt-1">Choose a filter to filter the revenue statistics by:</p>
+            <div class="pb-1 px-4 mt-1">
+                <input class="form-check-input" autocomplete="off" type='radio' name='filter' value='none' id="filter-none" checked>
+                <label class="form-check-label" for="filter-none">
+                    No filter
+                </label>
+                <br>
+                <input class="form-check-input" autocomplete="off" type='radio' name='filter' value='sessions' id="filter-session">
+                <label class="form-check-label" for="filter-session">
+                    Filter by session
+                </label>
+                <br>
+                <input class="form-check-input" autocomplete="off" type='radio' name='filter' value='locations' id="filter-location">
+                <label class="form-check-label" for="filter-location">
+                    Filter by location
+                </label>
+            </div>
+            <!-- in the div below place the selectors for filtering -->
+            <div id="filter-selects">
+            </div>
+
+             <button type="button" class="btn btn-primary mt-2" id="btn-update-graph">Update graph</button>
+
+            <hr>
+
+            <b><p class="pt-1">Weekly sales: <span id="txt-sales-figure">{{ revenue }}</span></p></b>
+            <img id="img-graph" src={{image}}>
+        </div>
+    </div>
+  {% endblock %}

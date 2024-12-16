@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+  {% block content %}
+    <head>
+        <script type="text/javascript">
+            var user_id = '{{ user_info.id }}'
+        </script>
+    </head>
+
+    <div class="container">
+        <div class="row justify-content-center mb-2 mt-4">
+            <h1 class="text-white font-weight-bold">Customer Dashboard</h1>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-12 bg-light rounded pt-3 px-4">
+                <div class="mt-2 mb-3">
+                    <h2 class="font-weight-bold text-center">Hello, {{ user_info.forename.capitalize() }}</h2>
+                </div>
+                <div class="ml-3">
+                    {% if user_info.membership_id == None %}
+                            <h4>Membership Status</h4>
+                            <p>You do not currently own a membership!</p>
+                            <a href="/monthly_membership">
+                                <button type="button" class="btn btn-primary">Purchase A Monthly Membership</button>
+                            </a>
+                            <br>
+                            <br>
+                            <a href="/annual_membership">
+                            <button type="button" class="btn btn-primary">Purchase an Annual Membership</button>
+                            </a>
+                            <p></p>
+                    {% else %}
+                            <h4>Membership Status</h4>
+                                <p>Username: {{ user_info.username}}</p>
+                                <p>Start Date: {{ membership_info.start_date }}</p>
+                            {% if membership_info.type == 0 %}
+                                <p>Type: Monthly</p>
+                                <p>PPM: £35</p>
+                            {% endif %}
+                            {% if membership_info.type == 1 %}
+                                <p>Type: Annually</p>
+                                <p>PPY: £300</p>
+                            {% endif %}
+                            <a href="/membership">
+                                <button type="button" class="btn btn-primary">Cancel Your Membership</button>
+                            </a>
+                            <p></p>
+                    {% endif %}
+                </div>
+
+                <hr>
+                
+                <!-- Card scroll area that shows each user's booked sessions -->
+                <div class="container-fluid">
+                    <h4 class="mt-3">Booked Sessions</h4>
+                    <div class="scrolling-wrapper row flex-row flex-nowrap mt-2 pb-4 pt-2">
+                        {% for session in booked_sessions %}
+                          <div class="col-4" id="{{ session[0] }}">
+                              <div class="card card-body card-block border border-info">
+                                <h5 class="card-title">{{session[1]}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{session[2]}}</h6>
+                                <h7 class="card-subtitle mb-2 text-muted">{{session[3]}}</h7>
+                                <p class="card-text">Duration: {{session[4]}} hrs</p>
+                                <button class="cancel_session btn btn-sm btn-info" id="{{ session[0] }}" name="{{user_info.id}}">Cancel</button>
+                              </div>
+                          </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="col bg-light rounded pt-3 px-4 mt-3">
+                    <p>Filter sessions by:</p>
+                    <div class="pb-1 px-4">
+                        <input class="form-check-input" autocomplete="off" type='radio' name='filter' value='none' id="filter-none" checked>
+                        <label class="form-check-label" for="filter-none">
+                            No filter
+                        </label>
+                        <br>
+                        <input class="form-check-input" autocomplete="off" type='radio' name='filter' value='sessions' id="filter-session">
+                        <label class="form-check-label" for="filter-session">
+                            Filter by session
+                        </label>
+                        <br>
+                        <input class="form-check-input" autocomplete="off" type='radio' name='filter' value='locations' id="filter-location">
+                        <label class="form-check-label" for="filter-location">
+                            Filter by location
+                        </label>
+                    </div>
+                    <!-- in the div below place the selectors for filtering -->
+                    <div class="mb-4" id="filter-selects">
+                    </div>
+                </div>
+
+                <!-- Calendar -->
+                <div class="row justify-content-center">
+                    <div class="calendar_container col-7 mr-5">
+                        <div class="calendar_template">
+                            <div class="months">
+                                <i class="left_button bi bi-chevron-left"></i>
+                                <div class="selected_date">
+                                    <h2></h2>
+                                    <p></p>
+                                </div>
+                                <i class="right_button bi bi-chevron-right"></i>
+                            </div>
+                            <div class="weekdays">
+                                <div>Sun</div>
+                                <div>Mon</div>
+                                <div>Tue</div>
+                                <div>Wed</div>
+                                <div>Thu</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+                            </div>
+                            <div class="days">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 bg-light rounded pt-3" id="sessions">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  {% endblock %}
